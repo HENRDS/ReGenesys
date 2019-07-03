@@ -40,8 +40,19 @@ ModelComponent* Match::LoadInstance(Model* model, std::map<std::string, std::str
 }
 
 void Match::_execute(Entity* entity) {
-    
-    
+    unsigned int n = this->_model->getSimulation()->getCurrentInputNumber();
+    switch (this->_type)
+    {
+    case MatchType::Any:
+        this->matchAny(n, entity);
+        break;
+    case MatchType::Attribute:
+        this->matchAttribute(n, entity);
+        break;
+    case MatchType::Type:
+        this->matchType(n, entity);
+        break;
+    }
 }
 
 bool Match::_loadInstance(std::map<std::string, std::string>* fields) {
@@ -67,3 +78,21 @@ bool Match::_check(std::string* errorMessage) {
 PluginInformation* Match::GetPluginInformation(){
     return new PluginInformation(Util::TypeOf<Match>(), &Match::LoadInstance);
 }
+void Match::matchAny(unsigned int n, Entity* entity) {
+
+}
+
+void Match::matchType(unsigned int n, Entity* entity) {
+
+}
+
+void Match::matchAttribute(unsigned int n, Entity* entity) {
+
+}
+
+void Match::setQueueCount(unsigned int count) {
+    this->_queueCount = count;
+}
+unsigned int Match::getQueueCount() const {
+    return this->_queueCount;
+};

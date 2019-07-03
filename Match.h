@@ -6,9 +6,10 @@
 
 class Match : public ModelComponent {
 public:
-    enum class MatchType {
+    enum class MatchType: int {
+        Any = 1,
         Attribute,
-        Any
+        Type
     };
     Match(Model* model);
     Match(const Match& orig);
@@ -17,8 +18,7 @@ public:
     void setType(MatchType newType);
     MatchType getType() const;  
     void setQueueCount(unsigned int count);
-    unsigned int getQueueCount() const;
-    
+    unsigned int getQueueCount() const;    
 
 public:
     virtual std::string show();
@@ -26,15 +26,20 @@ public:
     static PluginInformation* GetPluginInformation();
     static ModelComponent* LoadInstance(Model* model, std::map<std::string, std::string>* fields);
 protected:
+
     virtual void _execute(Entity* entity);
     virtual void _initBetweenReplications();
     virtual bool _loadInstance(std::map<std::string, std::string>* fields);
     virtual std::map<std::string, std::string>* _saveInstance();
     virtual bool _check(std::string* errorMessage);
 private:
-    std::vector<Queue*> _queues;
+    void matchAny(unsigned int n, Entity* entity);
+    void matchType(unsigned int n, Entity* entity);
+    void matchAttribute(unsigned int n, Entity* entity);
     unsigned int _queueCount;
+    std::vector<Queue*> _queues;
     MatchType _type;
+    std::string _attributeName;
 };
 
 
