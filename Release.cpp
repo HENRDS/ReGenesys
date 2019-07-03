@@ -93,7 +93,7 @@ void Release::_execute(Entity* entity) {
     assert(_resource->getNumberBusy() >= quantity);
     _model->getTraceManager()->traceSimulation(Util::TraceLevel::blockInternal, _model->getSimulation()->getSimulatedTime(), entity, this, "Entity frees " + std::to_string(quantity) + " units of resource \"" + resource->getName() + "\" seized on time " + std::to_string(_resource->getLastTimeSeized()));
     _resource->release(quantity, _model->getSimulation()->getSimulatedTime()); //{releases and sets the 'LastTimeSeized'property}
-    _model->sendEntityToComponent(entity, this->getNextComponents()->front(), 0.0);
+    _model->sendEntityToComponent(entity, this->getNextComponents()->front(), 0);
 }
 
 void Release::_initBetweenReplications() {
