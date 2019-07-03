@@ -3,6 +3,8 @@ set -euo pipefail
 shopt -s nullglob extglob
 
 base_d="bin"
+flags=( -fpermissive -fPIC -no-pie -std=c++11 )
+
 
 echo "Compiling source files" 
 for f in *.cpp; do
@@ -10,11 +12,11 @@ for f in *.cpp; do
     if [ "$f" -nt "$fobj" ]
     then
         echo "Building $f => $fobj"
-        g++ -fpermissive -fPIC -c -no-pie -std=c++11 -o $fobj $f
+        g++ ${flags[@]} -c -o $fobj $f
     fi
 done
 
 echo "Linking object files to myregenesysapplication.out"
-g++ -fpermissive -no-pie -fPIC "$base_d"/*.o parserBisonFlex/*.o -std=c++11 -o myregenesysapplication.out 
+g++ ${flags[@]} "$base_d"/*.o parserBisonFlex/*.o -o myregenesysapplication.out 
 
 echo "Compilation successfull"
