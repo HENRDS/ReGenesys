@@ -80,6 +80,18 @@ PluginInformation* Match::GetPluginInformation(){
 }
 void Match::matchAny(unsigned int n, Entity* entity) {
 
+    std::vector<Waiting*> entities(this->_queues.size());
+    for (int i = 0; i < this->_queues.size(); ++i) {
+        if (i == n) continue;
+        if (this->_queues[i]->size() == 0)
+            return;
+        entities[i] = this->_queues[i]->first();
+    }
+
+    for (int i = 0; i < this->_queues.size(); ++i) {
+        if (i == n) continue;
+    }
+
 }
 
 void Match::matchType(unsigned int n, Entity* entity) {

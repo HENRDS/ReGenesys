@@ -19,7 +19,8 @@ public:
     MatchType getType() const;  
     void setQueueCount(unsigned int count);
     unsigned int getQueueCount() const;    
-
+    void setAttributeName(std::string name);
+    std::string getAttributeName() const;
 public:
     virtual std::string show();
 public:
