@@ -96,3 +96,9 @@ void Match::setQueueCount(unsigned int count) {
 unsigned int Match::getQueueCount() const {
     return this->_queueCount;
 };
+void Match::setAttributeName(std::string name) {
+    this->_attributeName = std::move(name);
+}
+std::string Match::getAttributeName() const {
+    return this->_attributeName;
+}
