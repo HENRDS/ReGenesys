@@ -42,18 +42,18 @@ public:
     static ModelElement* LoadInstance(ElementManager* elems, std::map<std::string, std::string>* fields);
 public:
     void insertElement(Waiting* element);
-    void removeElement(Waiting* element, double tnow);
-    void initBetweenReplication();
+    void removeElement(Waiting* element);
     unsigned int size();
     Waiting* first();
+    Waiting* getAtRank(unsigned int rank);
     void setAttributeName(std::string _attributeName);
     std::string getAttributeName() const;
     void setOrderRule(OrderRule _orderRule);
     Queue::OrderRule getOrderRule() const;
     //List<Waiting*>* getList() const; // can't give direct access so Queue can collect statistics
-public: //g&s
 
-
+public: 
+    void initBetweenReplications();
 protected:
     virtual bool _loadInstance(std::map<std::string, std::string>* fields);
     virtual std::map<std::string, std::string>* _saveInstance();

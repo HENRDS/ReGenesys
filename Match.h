@@ -1,12 +1,25 @@
 #ifndef MATCH_H
 #define MATCH_H
+
 #include "ModelComponent.h"
 #include "Queue.h"
+
 class Match : public ModelComponent {
 public:
+    enum class MatchType {
+        Attribute,
+        Any
+    };
     Match(Model* model);
     Match(const Match& orig);
     virtual ~Match() noexcept;
+    
+    void setType(MatchType newType);
+    MatchType getType() const;  
+    void setQueueCount(unsigned int count);
+    unsigned int getQueueCount() const;
+    
+
 public:
     virtual std::string show();
 public:
@@ -20,7 +33,8 @@ protected:
     virtual bool _check(std::string* errorMessage);
 private:
     std::vector<Queue*> _queues;
-    
+    unsigned int _queueCount;
+    MatchType _type;
 };
 
 

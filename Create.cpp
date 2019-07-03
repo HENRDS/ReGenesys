@@ -60,12 +60,12 @@ void Create::_execute(Entity* entity) {
 	    newArrivalTime = tnow + timeBetweenCreations*timeScale;
 	    Event* newEvent = new Event(newArrivalTime, newEntity, this);
 	    _model->getEvents()->insert(newEvent);
-	    _model->getTraceManager()->traceSimulation(Util::TraceLevel::blockInternal, tnow, entity, this, "Arrival of entity " + std::to_string(newEntity->getId()) + " schedule for time " + std::to_string(newArrivalTime));
+	    _model->getTraceManager()->traceSimulation(Util::TraceLevel::blockInternal, tnow, entity, this, "Arrival of entity " + std::to_string(newEntity->getEntityNumber()) + " schedule for time " + std::to_string(newArrivalTime));
 	    //_model->getTrace()->trace(Util::TraceLevel::blockInternal, "Arrival of entity "+std::to_string(entity->getId()) + " schedule for time " +std::to_string(newArrivalTime));
 	}
     }
     _numberOut->incCountValue();
-    _model->sendEntityToComponent(entity, this->getNextComponents()->front(), 0.0);
+    _model->sendEntityToComponent(entity, this->getNextComponents()->frontConnection(), 0.0);
 }
 
 PluginInformation* Create::GetPluginInformation(){
@@ -91,7 +91,7 @@ void Create::_initBetweenReplications() {
 }
 
 std::map<std::string, std::string>* Create::_saveInstance() {
-    std::map<std::string, std::string>* fields = SourceModelComponent::_saveInstance(); //Util::TypeOf<Create>());
+    std::map<std::string, std::string>* fields = SourceModelComponent::_saveInstance(); 
     return fields;
 }
 

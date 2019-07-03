@@ -54,6 +54,7 @@ public: // only gets
     unsigned int getCurrentReplicationNumber() const;
     ModelComponent* getCurrentComponent() const;
     Entity* getCurrentEntity() const;
+    unsigned int getCurrentInputNumber() const;
     SimulationReporter_if* getSimulationReporter() const;
     /*
      * PRIVATE
@@ -85,6 +86,7 @@ private:
 private:
     Entity* _currentEntity;
     ModelComponent* _currentComponent;
+    unsigned int _currentInputNumber;
     SimulationReporter_if* _simulationReporter;
     unsigned int _currentReplicationNumber;
     List<ModelElement*>* _statsCountersSimulation = new List<ModelElement*>();
