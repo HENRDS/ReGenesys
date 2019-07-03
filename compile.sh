@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
-shopt -s nullglob extglob
+shopt -s nullglob extglob nocasematch
 
 base_d="bin"
-flags=( -fpermissive -fPIC -no-pie -std=c++11 )
-
+if [[ ! $(uname -s) =~ Linux ]]; then 
+    flags=( -fpermissive -fPIC -no-pie -std=c++11 )
+else
+    flags=( -fpermissive -fPIC -no-pie -std=c++11 )
+fi
 
 echo "Compiling source files" 
 for f in *.cpp; do
