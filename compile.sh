@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
-shopt -s nullglob extglob nocasematch
+shopt -s nullglob extglob
 
 base_d="bin"
-if [[ ! $(uname -s) =~ Linux ]]; then 
-    flags=( -fpermissive -fPIC -no-pie -std=c++11 )
-else
-    flags=( -fpermissive -fPIC -no-pie -std=c++11 )
-fi
+output_f="myregenesysapplication.out"
+flags=( -fpermissive -fPIC -no-pie -std=c++11 )
+
 
 echo "Compiling source files" 
 for f in *.cpp; do
@@ -19,7 +17,7 @@ for f in *.cpp; do
     fi
 done
 
-echo "Linking object files to myregenesysapplication.out"
-g++ ${flags[@]} "$base_d"/*.o parserBisonFlex/*.o -o myregenesysapplication.out 
+echo "Linking object files to $output_f"
+g++ ${flags[@]} "$base_d"/*.o parserBisonFlex/*.o -o "$output_f" 
 
 echo "Compilation successfull"

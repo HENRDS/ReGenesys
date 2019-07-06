@@ -191,3 +191,6 @@ void Match::setAttributeName(std::string name) {
 std::string Match::getAttributeName() const {
     return this->_attributeName;
 }
+void Match::addQueue(Queue *queue) {
+    this->_queues.push_back(queue);
+}
