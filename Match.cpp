@@ -75,7 +75,7 @@ bool Match::_check(std::string* errorMessage) {
     bool isOk = true;
     if (this->_type == MatchType::Attribute) {
         isOk = isOk || (!this->_attributeName.empty() && 
-            this->_model->getElementManager()->getElement(Util::TypeOf<Attribute>(), this->_attributeName) != nullptr)
+            this->_model->getElementManager()->getElement(Util::TypeOf<Attribute>(), this->_attributeName) != nullptr);
     }
     // TODO: Check if we have the same number of inputs and outputs, this is not possible currently because we don't have a way to get the input count 
     return true;
