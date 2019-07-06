@@ -21,6 +21,8 @@ public:
     void setQueueCount(unsigned int count);
     unsigned int getQueueCount() const;    
     
+    void addQueue(Queue *queue);
+
     void setAttributeName(std::string name);
     std::string getAttributeName() const;
 public:
