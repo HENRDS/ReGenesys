@@ -41,8 +41,8 @@ ModelComponent* Match::LoadInstance(Model* model, std::map<std::string, std::str
 
 void Match::_execute(Entity* entity) {
     unsigned int n = this->_model->getSimulation()->getCurrentInputNumber();
-    switch (this->_type)
-    {
+    this->_model->getTraceManager()->traceReport(Util::TraceLevel::report, "Entity arrived at connection " + std::to_string(n));
+    switch (this->_type) {
     case MatchType::Any:
         this->matchAny(n, entity);
         break;
@@ -89,13 +89,16 @@ void Match::matchAny(unsigned int n, Entity* entity) {
     
     for (int i = 0; i < this->_queues.size(); ++i) {
         if (i == n) continue;
-        if (this->_queues[i]->size() == 0)
+        if (this->_queues[i]->size() == 0) {
+            this->_model->getTraceManager()->traceReport(Util::TraceLevel::report, "Queeu " + std::to_string(i) + " is empty");
+            this->_queues[n]->insertElement(new Waiting(entity, this, this->_model->getSimulation()->getSimulatedTime()));
             return;
+        }
     }
 
     for (int i = 0; i < this->_queues.size(); ++i) {
         Connection *connection = this->getNextComponents()->getConnectionAtRank(i);
-        if (i == n) { 
+        if (i == n) {
             this->_model->sendEntityToComponent(entity, connection, 0);
         } else {
             Waiting *waiting = this->_queues[i]->first();
