@@ -12,6 +12,7 @@
  */
 
 #include "MyApp.h"
+#include <array>
 #include "GenesysConsole.h"
 
 // GEnSyS Simulator
@@ -374,7 +375,9 @@ void _buildMatchTest_any(Model* model) {
     Match* match = new Match(model);
     match->setType(Match::MatchType::Any);
     
-    Queue *queue1 = new Queue(elements, "Queue1"), *queue2 = new Queue(elements, "Queue2");
+    Queue *queue1 = new Queue(elements, "Queue1"), 
+          *queue2 = new Queue(elements, "Queue2");
+
     queue1->setOrderRule(Queue::OrderRule::FIFO);
     queue2->setOrderRule(Queue::OrderRule::FIFO);
     elements->insert(Util::TypeOf<Queue>(), queue1);
@@ -409,6 +412,60 @@ void _buildMatchTest_attribute(Model* model) {
 
     ComponentManager* components = model->getComponentManager();
     ElementManager* elements = model->getElementManager();
+   
+    
+    EntityType* type = new EntityType(elements, "TEntity");
+    elements->insert(Util::TypeOf<EntityType>(), type);
+
+    Create *create1 = new Create(model), 
+           *create2 = new Create(model);
+
+    create1->setEntityType(type);
+    create1->setTimeBetweenCreationsExpression("2");
+    create1->setTimeUnit(Util::TimeUnit::minute);
+    create1->setEntitiesPerCreation(1);
+    components->insert(create1);
+    
+    create2->setEntityType(type);
+    create2->setTimeBetweenCreationsExpression("10");
+    create2->setTimeUnit(Util::TimeUnit::minute);
+    create2->setEntitiesPerCreation(1);
+    components->insert(create2);
+
+
+    Assign *assign1 = new Assign(model),
+           *assign2 = new Assign(model);
+
+    Assign::Assignment *assignment = new Assign::Assignment(Assign::DestinationType::Attribute, "x", "DISC(0, 0.5, 1, 1.0)");
+    
+    assign1->getAssignments()->insert(assignment);
+    assign2->getAssignments()->insert(assignment);
+
+    Match* match = new Match(model);
+    match->setType(Match::MatchType::Any);
+    
+    Queue *queue1 = new Queue(elements, "Queue1"), 
+          *queue2 = new Queue(elements, "Queue2");
+          
+    queue1->setOrderRule(Queue::OrderRule::FIFO);
+    queue2->setOrderRule(Queue::OrderRule::FIFO);
+    elements->insert(Util::TypeOf<Queue>(), queue1);
+    elements->insert(Util::TypeOf<Queue>(), queue2);
+
+    match->addQueue(queue1);
+    match->addQueue(queue2);
+
+    Dispose* dispose1 = new Dispose(model);
+    components->insert(dispose1);
+    Dispose* dispose2 = new Dispose(model);
+    components->insert(dispose2);
+
+    create1->getNextComponents()->insert(assign1);
+    create2->getNextComponents()->insert(assign2);
+    assign1->getNextComponents()->insert(match, 0);
+    assign2->getNextComponents()->insert(match, 1);
+    match->getNextComponents()->insert(dispose1);
+    match->getNextComponents()->insert(dispose2);
 
 } 
 void _buildMatchTest_type(Model* model) {
@@ -426,7 +483,50 @@ void _buildMatchTest_type(Model* model) {
 
     ComponentManager* components = model->getComponentManager();
     ElementManager* elements = model->getElementManager();
+     
+    EntityType* type1 = new EntityType(elements, "TEntity1"), 
+              * type2 = new EntityType(elements, "TEntity2");
+    elements->insert(Util::TypeOf<EntityType>(), type1);
+    elements->insert(Util::TypeOf<EntityType>(), type2);
 
+    Create *create1 = new Create(model), 
+           *create2 = new Create(model);
+
+    create1->setEntityType(type1);
+    create1->setTimeBetweenCreationsExpression("2");
+    create1->setTimeUnit(Util::TimeUnit::minute);
+    create1->setEntitiesPerCreation(1);
+    components->insert(create1);
+    
+    create2->setEntityType(type2);
+    create2->setTimeBetweenCreationsExpression("10");
+    create2->setTimeUnit(Util::TimeUnit::minute);
+    create2->setEntitiesPerCreation(1);
+    components->insert(create2);
+
+    Match* match = new Match(model);
+    match->setType(Match::MatchType::Any);
+    
+    Queue *queue1 = new Queue(elements, "Queue1"), 
+          *queue2 = new Queue(elements, "Queue2");
+          
+    queue1->setOrderRule(Queue::OrderRule::FIFO);
+    queue2->setOrderRule(Queue::OrderRule::FIFO);
+    elements->insert(Util::TypeOf<Queue>(), queue1);
+    elements->insert(Util::TypeOf<Queue>(), queue2);
+
+    match->addQueue(queue1);
+    match->addQueue(queue2);
+
+    Dispose* dispose1 = new Dispose(model);
+    components->insert(dispose1);
+    Dispose* dispose2 = new Dispose(model);
+    components->insert(dispose2);
+
+    create1->getNextComponents()->insert(match, 0);
+    create2->getNextComponents()->insert(match, 1);
+    match->getNextComponents()->insert(dispose1);
+    match->getNextComponents()->insert(dispose2);
 } 
 
 
