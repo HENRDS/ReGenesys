@@ -12,5 +12,5 @@ What to do followed by the current implementation status, if applies.
 - [ ] Load instance
 - [ ] Save instance
 - [X] Check (***alpha***)
-- [ ] Tests
+- [X] Tests (***alpha***)
 
