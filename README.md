@@ -6,11 +6,11 @@ Implementation of the Match block for Genesys
 What to do followed by the current implementation status, if applies.
 
 
-- [X] Match by order (***alpha***)
-- [X] Match by entity type (***alpha***)
-- [X] Match by attribute (***alpha***)
-- [ ] Load instance
-- [ ] Save instance
+- [X] Match by order (***beta***)
+- [X] Match by entity type (***beta***)
+- [X] Match by attribute (***beta***)
+- [X] Load instance (***alpha***)
+- [X] Save instance (***alpha***)
 - [X] Check (***alpha***)
 - [X] Tests (***alpha***)
 

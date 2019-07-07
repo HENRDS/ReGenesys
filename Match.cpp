@@ -73,7 +73,9 @@ void Match::_execute(Entity* entity) {
 bool Match::_loadInstance(std::map<std::string, std::string>* fields) {
     bool res = ModelComponent::_loadInstance(fields);
     if (res) {
-
+        this->_type = static_cast<MatchType>(std::stoi(fields->find("type")->second));
+        if (this->_type == MatchType::Attribute)
+            this->_attributeName = fields->find("attributeName")->second;
     }
     return res;
 }
@@ -83,6 +85,9 @@ void Match::_initBetweenReplications() {
 
 std::map<std::string, std::string>* Match::_saveInstance() {
     std::map<std::string, std::string>* fields = ModelComponent::_saveInstance(); 
+    fields->emplace("type", std::to_string(int(this->_type)));
+    if (this->_type == MatchType::Attribute)
+        fields->emplace("attributeName", this->_attributeName);
     return fields;
 }
 
@@ -92,7 +97,7 @@ bool Match::_check(std::string* errorMessage) {
         isOk = isOk || (!this->_attributeName.empty() && 
             this->_model->getElementManager()->getElement(Util::TypeOf<Attribute>(), this->_attributeName) != nullptr);
     }
-    // TODO: Check if we have the same number of inputs and outputs, this is not possible currently because we don't have a way to get the input count 
+    // TODO: Check if we have the same number of inputs and outputs. This is not possible currently because we don't have a way to get the input count 
     return true;
 }
 

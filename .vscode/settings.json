@@ -38,6 +38,10 @@
         "algorithm": "cpp",
         "cstddef": "cpp",
         "map": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "cstring": "cpp",
+        "bit": "cpp",
+        "cinttypes": "cpp",
+        "memory": "cpp"
     }
 }
