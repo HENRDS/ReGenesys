@@ -352,6 +352,9 @@ void _buildMatchTest_any(Model* model) {
     ComponentManager* components = model->getComponentManager();
     ElementManager* elements = model->getElementManager();
 
+    EntityType* type = new EntityType(elements, "TEntity");
+    elements->insert(Util::TypeOf<EntityType>(), type);
+
 } 
 void _buildMatchTest_attribute(Model* model) {
 

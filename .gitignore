@@ -12,7 +12,9 @@
 *.o
 #exceptions of object file
 !bin/Attribute.o
+!bin/Batch.o
 !bin/BuildSimulationModel.o
+!bin/CellularAutomata.o
 !bin/CollectorDatafileDefaultImpl1.o
 !bin/CollectorDatafileDummyImpl.o
 !bin/CollectorDefaultImpl1.o
@@ -21,7 +23,9 @@
 !bin/ConnectionManager.o
 !bin/Counter.o
 !bin/Decide.o
+!bin/DropOff.o
 !bin/ElementManager.o
+!bin/Enter.o
 !bin/Entity.o
 !bin/EntityType.o
 !bin/Event.o
@@ -29,11 +33,15 @@
 !bin/ExperimentDesignDummyImpl.o
 !bin/FactorOrInteractionContribution.o
 !bin/FitterDefaultImpl1.o
+!bin/Formula.o
 !bin/GenesysGUI.o
+!bin/Group.o
+!bin/Hold.o
 !bin/HypothesisTesterDefaultImpl1.o
 !bin/HypothesisTesterDummyImpl.o
 !bin/IntegratorDefaultImpl1.o
 !bin/IntegratorDummyImpl.o
+!bin/Leave.o
 !bin/LicenceManager.o
 !bin/main.o
 !bin/ModelCheckerDefaultImpl1.o
@@ -44,15 +52,26 @@
 !bin/Model.o
 !bin/ModelPersistenceDefaultImpl1.o
 !bin/ModelSimulation.o
+!bin/ODE.o
 !bin/OnEventManager.o
 !bin/ParserDefaultImpl1.o
 !bin/ParserDummyImpl.o
+!bin/PickUp.o
 !bin/PluginManager.o
 !bin/Plugin.o
 !bin/ProbDistrib.o
+!bin/ProcessAnalyserDefaultImpl1.o
 !bin/ProcessAnalyserDummyImpl.o
+!bin/Remove.o
+!bin/Route.o
 !bin/SamplerDefaultImpl1.o
 !bin/SamplerDummyImpl.o
+!bin/Schedule.o
+!bin/Search.o
+!bin/Separate.o
+!bin/Sequence.o
+!bin/Set.o
+!bin/Signal.o
 !bin/SimulationControl.o
 !bin/SimulationReporterDefaultImpl1.o
 !bin/SimulationResponse.o
@@ -60,6 +79,7 @@
 !bin/Simulator.o
 !bin/SinkModelComponent.o
 !bin/SourceModelComponent.o
+!bin/Station.o
 !bin/StatisticsCollector.o
 !bin/StatisticsDataFileDummyImpl.o
 !bin/StatisticsDefaultImpl1.o
@@ -73,6 +93,7 @@
 !bin/Variable.o
 !bin/Waiting.o
 !bin/WaitingResource.o
+
 
 *.obj
 
