@@ -335,10 +335,6 @@ void _buildMostCompleteModel(Model* model) {
     release2->getNextComponents()->insert(record2);
     record2->getNextComponents()->insert(dummy1);
     dummy1->getNextComponents()->insert(dispose1);
-
-    ComponentManager* components = model->getComponentManager();
-    ElementManager* elements = model->getElementManager();
-
 }
 
 void _buildMatchTest_any(Model* model) {
@@ -386,6 +382,10 @@ void _buildMatchTest_type(Model* model) {
     infos->setWarmUpPeriod(50);
     infos->setWarmUpPeriodTimeUnit(Util::TimeUnit::second);
     infos->setDescription("./models/model_MatchType.txt");
+
+    ComponentManager* components = model->getComponentManager();
+    ElementManager* elements = model->getElementManager();
+
 } 
 
 
