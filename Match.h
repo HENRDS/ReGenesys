@@ -16,10 +16,7 @@ public:
     virtual ~Match() noexcept;
     
     void setType(MatchType newType);
-    MatchType getType() const;  
-    // TODO: Change get/set count to set queue, so it matches the other examples
-    void setQueueCount(unsigned int count);
-    unsigned int getQueueCount() const;    
+    MatchType getType() const;   
     
     void addQueue(Queue *queue);
 
@@ -42,7 +39,6 @@ private:
     void matchType(unsigned int n, Entity* entity);
     void matchAttribute(unsigned int n, Entity* entity);
     
-    unsigned int _queueCount;
     std::vector<Queue*> _queues;
     MatchType _type;
     std::string _attributeName;

@@ -85,6 +85,8 @@ PluginInformation* Match::GetPluginInformation(){
     return new PluginInformation(Util::TypeOf<Match>(), &Match::LoadInstance);
 }
 void Match::matchAny(unsigned int n, Entity* entity) {
+    /* Asymptotic complexity: O(n) */
+    
     for (int i = 0; i < this->_queues.size(); ++i) {
         if (i == n) continue;
         if (this->_queues[i]->size() == 0)
@@ -104,6 +106,7 @@ void Match::matchAny(unsigned int n, Entity* entity) {
 }
 
 void Match::matchType(unsigned int n, Entity* entity) {
+    /* Asymptotic complexity: O(n) */
     std::vector<Waiting*> items(this->_queues.size());
     for (int i = 0; i < this->_queues.size(); ++i) {
         if (i == n) {
@@ -142,6 +145,7 @@ void Match::matchType(unsigned int n, Entity* entity) {
 }
 
 void Match::matchAttribute(unsigned int n, Entity* entity) {
+    /* Asymptotic complexity: O(n) */
     std::vector<Waiting*> items(this->_queues.size());
     for (int i = 0; i < this->_queues.size(); ++i) {
         if (i == n) {
@@ -178,13 +182,7 @@ void Match::matchAttribute(unsigned int n, Entity* entity) {
     }
 }
 
-void Match::setQueueCount(unsigned int count) {
-    this->_queueCount = count;
-}
 
-unsigned int Match::getQueueCount() const {
-    return this->_queueCount;
-};
 void Match::setAttributeName(std::string name) {
     this->_attributeName = std::move(name);
 }

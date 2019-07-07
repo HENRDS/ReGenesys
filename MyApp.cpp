@@ -337,6 +337,17 @@ void _buildMostCompleteModel(Model* model) {
     dummy1->getNextComponents()->insert(dispose1);
 }
 
+void _buildMatchTest_any(Model* model) {
+    
+} 
+void _buildMatchTest_attribute(Model* model) {
+
+} 
+void _buildMatchTest_type(Model* model) {
+
+} 
+
+
 /**
  * This function shows an example of how to create a simulation model.
  * It creates some handlers for tracing (debug) and for events, set model infos and than creates the model itself.
