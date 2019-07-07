@@ -30,6 +30,7 @@
 #include "Record.h"
 #include "Decide.h"
 #include "Dummy.h"
+#include "Match.h"
 
 // Model elements
 #include "ElementManager.h"
@@ -355,6 +356,43 @@ void _buildMatchTest_any(Model* model) {
     EntityType* type = new EntityType(elements, "TEntity");
     elements->insert(Util::TypeOf<EntityType>(), type);
 
+    Create *create1 = new Create(model), 
+           *create2 = new Create(model);
+
+    create1->setEntityType(type);
+    create1->setTimeBetweenCreationsExpression("2");
+    create1->setTimeUnit(Util::TimeUnit::minute);
+    create1->setEntitiesPerCreation(1);
+    components->insert(create1);
+    
+    create2->setEntityType(type);
+    create2->setTimeBetweenCreationsExpression("10");
+    create2->setTimeUnit(Util::TimeUnit::minute);
+    create2->setEntitiesPerCreation(1);
+    components->insert(create2);
+
+    Match* match = new Match(model);
+    match->setType(Match::MatchType::Any);
+    
+    Queue *queue1 = new Queue(elements, "Queue1"), *queue2 = new Queue(elements, "Queue2");
+    queue1->setOrderRule(Queue::OrderRule::FIFO);
+    queue2->setOrderRule(Queue::OrderRule::FIFO);
+    elements->insert(Util::TypeOf<Queue>(), queue1);
+    elements->insert(Util::TypeOf<Queue>(), queue2);
+
+    match->addQueue(queue1);
+    match->addQueue(queue2);
+
+    Dispose* dispose1 = new Dispose(model);
+    components->insert(dispose1);
+    Dispose* dispose2 = new Dispose(model);
+    components->insert(dispose2);
+
+    create1->getNextComponents()->insert(match, 0);
+    create2->getNextComponents()->insert(match, 1);
+    match->getNextComponents()->insert(dispose1);
+    match->getNextComponents()->insert(dispose2);
+
 } 
 void _buildMatchTest_attribute(Model* model) {
 
@@ -423,8 +461,9 @@ ev->addOnProcessEventHandler(&onProcessEventHandler);
 
     //_buildModel01_CreDelDis(model);
     //_buildModel02_CreDelDis(model);
-    _buildModel03_CreSeiDelResDis(model);
+    // _buildModel03_CreSeiDelResDis(model);
     //_buildMostCompleteModel(model);
+    _buildMatchTest_any(model);
 
     simulator->getModelManager()->insert(model);
     //model->saveModel(model->getInfos()->getDescription());
