@@ -435,14 +435,15 @@ void _buildMatchTest_attribute(Model* model) {
 
     Assign *assign1 = new Assign(model),
            *assign2 = new Assign(model);
-
+    
     Assign::Assignment *assignment = new Assign::Assignment(Assign::DestinationType::Attribute, "x", "DISC(0, 0.5, 1, 1.0)");
     
     assign1->getAssignments()->insert(assignment);
     assign2->getAssignments()->insert(assignment);
 
     Match* match = new Match(model);
-    match->setType(Match::MatchType::Any);
+    match->setType(Match::MatchType::Attribute);
+    match->setAttributeName("x");
     
     Queue *queue1 = new Queue(elements, "Queue1"), 
           *queue2 = new Queue(elements, "Queue2");
@@ -505,7 +506,7 @@ void _buildMatchTest_type(Model* model) {
     components->insert(create2);
 
     Match* match = new Match(model);
-    match->setType(Match::MatchType::Any);
+    match->setType(Match::MatchType::Type);
     
     Queue *queue1 = new Queue(elements, "Queue1"), 
           *queue2 = new Queue(elements, "Queue2");
