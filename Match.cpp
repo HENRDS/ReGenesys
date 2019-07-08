@@ -1,18 +1,3 @@
-/*
-Copyright (C) 2019 Henry R. Da Silva
-  Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.  
-*/
-
 #include <exception>
 #include "Match.h"
 #include "Model.h"
@@ -106,6 +91,7 @@ bool Match::_check(std::string* errorMessage) {
 PluginInformation* Match::GetPluginInformation(){
     return new PluginInformation(Util::TypeOf<Match>(), &Match::LoadInstance);
 }
+
 void Match::matchAny(unsigned int n, Entity* entity) {
     /* Asymptotic complexity: O(n) */
     
@@ -167,7 +153,6 @@ void Match::matchType(unsigned int n, Entity* entity) {
     }
 
 }
-
 void Match::matchAttribute(unsigned int n, Entity* entity) {
     /* Asymptotic complexity: O(n) */
     std::vector<Waiting*> items(this->_queues.size());

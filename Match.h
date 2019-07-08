@@ -1,18 +1,3 @@
-/*
-Copyright (C) 2019 Henry R. Da Silva
-  Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.  
-*/
-
 #ifndef MATCH_H
 #define MATCH_H
 
@@ -32,10 +17,16 @@ public:
     virtual ~Match() noexcept;
     
     void setType(MatchType newType);
+    /// @brief Gets the match type
+    /// @returns The match type
     MatchType getType() const;   
-    
+
+    /// @brief Add a queue to the component
+    /// @param queue a pointer to the queue to be added
     void addQueue(Queue *queue);
 
+    /// @brief Sets the name of the attribute to be matched. Only applies if type is MatchType::Attribute
+    /// param name the name of the attribute
     void setAttributeName(std::string name);
     std::string getAttributeName() const;
 public:
@@ -52,8 +43,19 @@ protected:
     virtual std::map<std::string, std::string>* _saveInstance();
     virtual bool _check(std::string* errorMessage);
 private:
+    /// @brief Method for matching the incoming entities. One entity must reside in each queue for a match to be made. 
+    /// @param n connection by which the entity arrived
+    /// @param entity current entity
     void matchAny(unsigned int n, Entity* entity);
+
+    /// @brief Method for matching the incoming entities. One entity from the same type must reside in each queue for a match to be made. 
+    /// @param n connection by which the entity arrived
+    /// @param entity current entity
     void matchType(unsigned int n, Entity* entity);
+
+    /// @brief Method for matching the incoming entities. One entity must reside in each queue with the same attribute value for a match to be made.
+    /// @param n connection by which the entity arrived
+    /// @param entity current entity
     void matchAttribute(unsigned int n, Entity* entity);
     
     std::vector<Queue*> _queues;
